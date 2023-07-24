@@ -1,11 +1,13 @@
-import {  useContext, useState } from "react";
+import {  useContext, useRef, useState } from "react";
 import {  useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import SocialLogin from "../../../Social/SocialLogin";
-
+import { getAuth, sendPasswordResetEmail } from "firebase/auth";
+const auth = getAuth();
 const Login = () => {
 const [error,setError]=useState('')
+const emailRef=useRef()
 const {loginUser}=useContext(AuthContext);
 const navigate=useNavigate()
 const location=useLocation()
@@ -30,6 +32,23 @@ const from = location.state?.from?.pathname || '/';
     setError(err.message)})
     
   }
+
+  const handleResetPassword=()=>{
+ const email=emailRef.current.value;
+ if(!email){
+  alert('plese write your email into email field')
+  return
+ }
+ sendPasswordResetEmail(auth, email)
+  .then(() => {
+    alert('A email have sent in your inbox')
+  })
+  .catch((error) => {
+    setError(error.message)
+   
+  });
+
+  }
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
@@ -43,7 +62,7 @@ const from = location.state?.from?.pathname || '/';
               <label className="label">
                 <span className="label-text">Email</span>
               </label>
-              <input type="email" placeholder="email" {...register("email", { required: true })} className="input input-bordered" />
+              <input type="email"  placeholder="email" {...register("email", { required: true })} ref={emailRef} className="input input-bordered" />
               {errors.email && <span className='text-red-500'>Email is required</span>}
             </div>
             <div className="form-control">
@@ -52,7 +71,7 @@ const from = location.state?.from?.pathname || '/';
               </label>
               <input type="password" placeholder="password" {...register("password", { required: true })} className="input input-bordered" />
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                <a href="#" onClick={handleResetPassword} className="label-text-alt link link-hover">Forgot password?</a>
               </label>
             </div>
             <div className="form-control mt-6">
