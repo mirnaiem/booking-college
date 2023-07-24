@@ -59,7 +59,7 @@ const router = createBrowserRouter([
     },
     {
       path:'review/:id',
-      element:<Review></Review>,
+      element:<PrivateRoute><Review></Review></PrivateRoute>,
       loader:({params})=>fetch(`https://college-booking-server-pi.vercel.app/college/${params.id}`)
     }
    ]
