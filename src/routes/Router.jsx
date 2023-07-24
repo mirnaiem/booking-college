@@ -11,7 +11,15 @@ import PrivateRoute from "./PrivateRoute";
 import Admission from "../Components/Pages/Admission/Admission";
 import AdmissionForm from "../Components/Pages/Admission/AdmissionForm";
 import MyCollege from "../Components/Pages/MyCollege/MyCollege";
+import Review from "../Components/Pages/Review/Review";
+import NotFound from "../Components/Pages/NotFound/NotFound";
 const router = createBrowserRouter([
+  {
+    
+    path:'*',
+    element:<NotFound></NotFound>
+   
+},
  {
    path: "/",
    element: <Main></Main>,
@@ -31,12 +39,12 @@ const router = createBrowserRouter([
     {
      path:'details/:id',
      element:<PrivateRoute><Details></Details></PrivateRoute>,
-     loader:({params})=>fetch(`http://localhost:3000/college/${params.id}`)
+     loader:({params})=>fetch(`https://college-booking-server-pi.vercel.app/college/${params.id}`)
     },
     {
      path:'admission/:id',
      element:<PrivateRoute><AdmissionForm></AdmissionForm></PrivateRoute>,
-     loader:({params})=>fetch(`http://localhost:3000/college/${params.id}`)
+     loader:({params})=>fetch(`https://college-booking-server-pi.vercel.app/college/${params.id}`)
     },
     {
      path:'colleges',
@@ -48,6 +56,11 @@ const router = createBrowserRouter([
     },{
       path:'myColleges',
       element:<MyCollege></MyCollege>
+    },
+    {
+      path:'review/:id',
+      element:<Review></Review>,
+      loader:({params})=>fetch(`https://college-booking-server-pi.vercel.app/college/${params.id}`)
     }
    ]
  },

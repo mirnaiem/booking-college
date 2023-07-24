@@ -5,7 +5,7 @@ const Colleges = () => {
  const [colleges, setColleges] = useState([]); 
 
   useEffect(() => {
-    fetch('http://localhost:3000/home/colleges')
+    fetch('https://college-booking-server-pi.vercel.app/home/colleges')
       .then((res) => res.json())
       .then(data => setColleges(data))
       .catch(error => console.error("Error fetching data:", error));

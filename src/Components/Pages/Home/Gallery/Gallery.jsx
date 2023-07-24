@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const Gallery = () => {
  const [images,setImages]=useState([])
  useEffect(()=>{
-  fetch('http://localhost:3000/gallery')
+  fetch('https://college-booking-server-pi.vercel.app/gallery')
   .then(res=>res.json())
   .then(data=>setImages(data))
  })

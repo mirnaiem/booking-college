@@ -5,7 +5,7 @@ import ResearchCard from "./ResearchCard";
 const Research = () => {
  const [researches,setResearches]=useState([])
  useEffect(()=>{
-  fetch('http://localhost:3000/research')
+  fetch('https://college-booking-server-pi.vercel.app/research')
   .then(res=>res.json())
   .then(data=>setResearches(data))
  })

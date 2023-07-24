@@ -1,6 +1,6 @@
 import Gallery from "./Gallery/Gallery";
 import Research from "./Research/Research";
-import Review from "./Review/Review";
+import Review from "./Reviews/Reviews";
 import Search from "./Search/Search";
 import College from "./college/College";
 

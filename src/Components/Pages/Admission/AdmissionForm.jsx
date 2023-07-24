@@ -28,7 +28,7 @@ const AdmissionForm = () => {
     collegeInfo:data
   }
 
-  fetch('http://localhost:3000/admission',{
+  fetch('https://college-booking-server-pi.vercel.app/admission',{
     method: 'POST',
     headers:{
       'content-type': 'application/json'
